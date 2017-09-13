@@ -1,5 +1,6 @@
 var passport = require('passport');
 var User = require('../models/user');
+var Admin = require('../models/admin')
 var LocalStrategy = require('passport-local').Strategy; // выбираем локальную стратегию
 
 
@@ -80,3 +81,29 @@ passport.use('local.signin', new LocalStrategy({
         return done(null, user);
     });
 }));
+
+// passport.use('admin.signin', new LocalStrategy({
+//     usernameField: 'email',
+//     passwordField: 'password',
+//     passReqToCallback: true
+// }, function (req, email, password, done) {
+//     req.checkBody('email', 'Invalid email').notEmpty();
+//     req.checkBody('password', 'Invalid password.').notEmpty();
+//     var errors = req.validationErrors();
+//     if (errors) {
+//         var messages = [];
+//         errors.forEach(function (error) {
+//             messages.push(error.msg);
+//         });
+//         return done(null, false, req.flash('error', messages))
+//     }
+//     Admin.findOne({'email': email}, function (err, admin) {
+//         if (err)
+//             return done(err);
+//         if (!admin) {
+//             return done(null, false, {message: 'No Admin found'});
+//         }
+//
+//         return done(null, admin);
+//     });
+// }));
